@@ -18,17 +18,9 @@ MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5001")
 
 app = FastAPI(title="MLOps Inference API")
 
-MODEL_MODULE_MAP = {
-    "iris-classifier": "models.iris_classifier.inference",
-    "wine-clustering": "models.wine_clustering.inference",
-    "rule-engine": "models.rule_engine.inference",
-}
-
-
 def get_inference_module(model_name: str):
-    module_path = MODEL_MODULE_MAP.get(model_name)
-    if not module_path:
-        return None
+    module_name = model_name.replace("-", "_")
+    module_path = f"models.{module_name}.inference"
     try:
         return importlib.import_module(module_path)
     except ModuleNotFoundError:
