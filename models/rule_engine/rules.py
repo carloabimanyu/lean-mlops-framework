@@ -3,7 +3,7 @@ def evaluate(data: dict) -> dict:
 
     if data.get("age", 99) < 18:
         triggered.append("underage")
-    if data.get("income", 0) < 1000:
+    if data.get("income", float("inf")) < 1000:
         triggered.append("low_income")
     if data.get("credit_score", 999) < 500:
         triggered.append("poor_credit")

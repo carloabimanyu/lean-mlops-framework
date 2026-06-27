@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from models.rule_engine.rules import evaluate
+from .rules import evaluate
 
 MODEL_NAME = "rule-engine"
 

@@ -10,7 +10,7 @@ MODEL_NAME = "iris-classifier"
 
 
 def train() -> str:
-    mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5000"))
+    mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5001"))
     mlflow.set_experiment("iris-classifier")
 
     iris = load_iris()
