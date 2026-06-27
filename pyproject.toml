@@ -3,7 +3,7 @@ name = "lean-mlops-framework"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
-    "mlflow==2.13.2",
+    "mlflow==3.14.0",
     "scikit-learn==1.4.2",
     "fastapi==0.111.0",
     "uvicorn==0.30.1",
