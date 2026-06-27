@@ -1,0 +1,40 @@
+services:
+  mlflow:
+    build: ./mlflow
+    container_name: mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow_data:/mlflow
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ./services/api
+    container_name: api
+    ports:
+      - "8000:8000"
+    volumes:
+      - mlflow_data:/mlflow
+    depends_on:
+      mlflow:
+        condition: service_healthy
+    env_file: .env
+
+  batch_runner:
+    build: ./services/batch_runner
+    container_name: batch_runner
+    volumes:
+      - mlflow_data:/mlflow
+      - ./reports:/reports
+      - ./models:/models
+    depends_on:
+      mlflow:
+        condition: service_healthy
+    env_file: .env
+
+volumes:
+  mlflow_data:

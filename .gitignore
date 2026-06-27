@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+
+# Environment
+.env
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Outputs
+models/*/outputs/*
+models/*/data/*
+reports/*
+!reports/.gitkeep
+!models/*/outputs/.gitkeep
+!models/*/data/.gitkeep
+
+# OS
+.DS_Store
+
+# Internal planning docs
+docs/
+project-context.md
+prompt.md
+CLAUDE.md

@@ -1,0 +1,29 @@
+[project]
+name = "lean-mlops-framework"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "mlflow==2.13.2",
+    "scikit-learn==1.4.2",
+    "fastapi==0.111.0",
+    "uvicorn==0.30.1",
+    "pydantic==2.7.4",
+    "apscheduler==3.10.4",
+    "evidently==0.4.33",
+    "pandas==2.2.2",
+    "numpy==1.26.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==8.2.2",
+    "pytest-mock==3.14.0",
+    "httpx==0.27.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest==8.2.2",
+    "pytest-mock==3.14.0",
+    "httpx==0.27.0",
+]
