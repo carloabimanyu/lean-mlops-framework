@@ -1,7 +1,11 @@
+import os
+import mlflow.pyfunc
 from pydantic import BaseModel
-from .rules import evaluate
 
+MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5001")
 MODEL_NAME = "rule-engine"
+
+_model = None
 
 
 class InputSchema(BaseModel):
@@ -10,6 +14,16 @@ class InputSchema(BaseModel):
     credit_score: int
 
 
+def load_model():
+    global _model
+    import mlflow
+    mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
+    _model = mlflow.pyfunc.load_model(f"models:/{MODEL_NAME}@champion")
+
+
 def predict(data: dict) -> dict:
+    if _model is None:
+        load_model()
     validated = InputSchema(**data)
-    return evaluate(validated.model_dump())
+    results = _model.predict([validated.model_dump()])
+    return results[0]

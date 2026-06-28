@@ -41,7 +41,10 @@ def setup() -> str:
             python_model=RuleEngineModel(),
         )
 
-        mlflow.register_model(f"runs:/{run.info.run_id}/model", MODEL_NAME)
+        registered = mlflow.register_model(f"runs:/{run.info.run_id}/model", MODEL_NAME)
+
+        client = mlflow.MlflowClient()
+        client.set_registered_model_alias(MODEL_NAME, "champion", registered.version)
 
         return run.info.run_id
 
