@@ -51,11 +51,7 @@ def run_monitoring() -> dict | None:
     log.info(f"Drift report saved: {report_path}")
 
     result = report.as_dict()
-    drift_score = result["metrics"][0]["result"].get("dataset_drift_share")
-    if drift_score is None:
-        log.warning("dataset_drift_share not found in Evidently result — check Evidently version")
-        return {"drift_detected": False, "drift_score": 0.0}
-    drift_score = float(drift_score)
+    drift_score = float(result["metrics"][0]["result"].get("share_of_drifted_columns", 0.0))
     drift_detected = drift_score >= drift_threshold
 
     log.info(f"Drift score: {drift_score:.3f} (threshold: {drift_threshold}) — detected: {drift_detected}")
