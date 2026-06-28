@@ -9,7 +9,7 @@ import numpy as np
 from apscheduler.schedulers.blocking import BlockingScheduler
 from sklearn.datasets import load_wine
 
-sys.path.insert(0, "/models")
+sys.path.insert(0, "/")
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
