@@ -20,7 +20,7 @@ class InputSchema(BaseModel):
 def load_model():
     global _model
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
-    _model = mlflow.sklearn.load_model(f"models:/{MODEL_NAME}/latest")
+    _model = mlflow.sklearn.load_model(f"models:/{MODEL_NAME}@champion")
 
 
 def predict(data: dict) -> dict:

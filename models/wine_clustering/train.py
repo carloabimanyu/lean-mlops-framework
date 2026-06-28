@@ -32,7 +32,8 @@ def train() -> str:
         mlflow.sklearn.log_model(pipeline, name="model")
 
         model_uri = f"runs:/{run.info.run_id}/model"
-        mlflow.register_model(model_uri, MODEL_NAME)
+        mv = mlflow.register_model(model_uri, MODEL_NAME)
+        mlflow.MlflowClient().set_registered_model_alias(MODEL_NAME, "champion", mv.version)
 
         return run.info.run_id
 
