@@ -1,7 +1,6 @@
 import os
 import sys
 import logging
-import json
 from datetime import datetime
 from pathlib import Path
 import pandas as pd
@@ -92,9 +91,13 @@ def run_all():
     log.info("=== Batch run started ===")
     try:
         run_wine_clustering_batch()
+    except Exception as e:
+        log.error(f"wine_clustering batch failed: {e}", exc_info=True)
+
+    try:
         run_rule_engine_batch()
     except Exception as e:
-        log.error(f"Batch run failed: {e}", exc_info=True)
+        log.error(f"rule_engine batch failed: {e}", exc_info=True)
 
     try:
         from monitor import run_monitoring

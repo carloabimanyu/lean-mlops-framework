@@ -9,6 +9,4 @@ COPY runner.py ./
 # monitor.py and alert.py are Phase 5 files — copied in when they exist
 # Runner handles ImportError for monitor gracefully at runtime
 
-EXPOSE 8001
-
 CMD ["python", "runner.py"]
